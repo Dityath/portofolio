@@ -1,17 +1,26 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/navigation/Navigation.astro";
+import Hero from "../components/home/Hero.astro";
+import Statement from "../components/home/Statement.astro";
+import ProjectsGrid from "../components/home/ProjectsGrid.astro";
+import SkillsSection from "../components/home/SkillsSection.astro";
+import StatsSection from "../components/home/StatsSection.astro";
+import CTASection from "../components/home/CTASection.astro";
 
+const title = "Dityath - Portofolio";
+const description =
+  "Ditya Athallah's portfolio of a fullstack developer specializing in React, TypeScript, Golang, and Rust. Building things that don't break.";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={title} description={description}>
+  <Navigation />
+  <main>
+    <Hero />
+    <Statement />
+    <ProjectsGrid />
+    <SkillsSection />
+    <StatsSection />
+    <CTASection />
+  </main>
+</BaseLayout>

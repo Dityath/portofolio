@@ -1,0 +1,180 @@
+---
+import type { Skill } from "../../types";
+
+const skills: Skill[] = [
+  { name: "React", category: "frontend", proficiency: 95 },
+  { name: "TypeScript", category: "frontend", proficiency: 90 },
+  { name: "Next.js", category: "frontend", proficiency: 85 },
+  { name: "Tailwind CSS", category: "frontend", proficiency: 90 },
+  { name: "Golang", category: "backend", proficiency: 80 },
+  { name: "Rust", category: "backend", proficiency: 70 },
+  { name: "Node.js", category: "backend", proficiency: 85 },
+  { name: "PostgreSQL", category: "backend", proficiency: 85 },
+  { name: "Docker", category: "tools", proficiency: 90 },
+  { name: "Kubernetes", category: "tools", proficiency: 75 },
+  { name: "Git", category: "tools", proficiency: 95 },
+  { name: "GSAP", category: "other", proficiency: 85 },
+];
+---
+
+<section class="skills section-brutal" id="skills">
+  <div class="container-brutal">
+    <h2 class="section-title">TECH STACK</h2>
+
+    <!-- Scrolling text pattern -->
+    <div class="skills-marquee" aria-hidden="true">
+      <div class="skills-marquee-content">
+        <span class="skills-marquee-text"
+          >FRONTEND • BACKEND • DEVOPS • DATABASES • FRONTEND • BACKEND • DEVOPS
+          • DATABASES •
+        </span>
+        <span class="skills-marquee-text"
+          >FRONTEND • BACKEND • DEVOPS • DATABASES • FRONTEND • BACKEND • DEVOPS
+          • DATABASES •
+        </span>
+      </div>
+    </div>
+
+    <!-- Skills table -->
+    <div class="skills-table">
+      {
+        skills.map((skill) => (
+          <div class="skill-row">
+            <div class="skill-info">
+              <span class="skill-name">{skill.name}</span>
+              <span class="skill-category">[{skill.category}]</span>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-bar" data-proficiency={skill.proficiency} />
+            </div>
+            <span class="skill-percentage">{skill.proficiency}%</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-marquee {
+    margin: 4rem 0;
+    overflow: hidden;
+  }
+
+  .skills-marquee-content {
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .skills-marquee-text {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    letter-spacing: 0.1em;
+    opacity: 0.1;
+    animation: marquee-reverse 25s linear infinite;
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .skills-table {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 80px;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--color-fg);
+  }
+
+  @media (max-width: 768px) {
+    .skill-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  .skill-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .skill-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+
+  .skill-category {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  .skill-bar-container {
+    height: 10px;
+    background: transparent;
+    border: 2px solid var(--color-fg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-bar {
+    height: 100%;
+    background: var(--color-accent);
+    width: 0;
+    transition: width 1s ease-out;
+  }
+
+  .skill-percentage {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skills-marquee-text {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const skillBars = document.querySelectorAll(".skill-bar");
+
+    skillBars.forEach((bar) => {
+      const proficiency = bar.getAttribute("data-proficiency");
+
+      gsap.to(bar, {
+        width: `${proficiency}%`,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: bar,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+  });
+</script>

@@ -1,0 +1,30 @@
+# Build outputs
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Lock files
+bun.lockb
+package-lock.json
+yarn.lock
+
+# Env files
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Files with Prettier Astro parser issues (complex TUI formatting)
+src/components/home/ProjectsGrid.astro
+src/layouts/BaseLayout.astro
+src/pages/404.astro

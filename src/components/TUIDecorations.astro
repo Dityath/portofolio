@@ -1,0 +1,195 @@
+---
+// Global TUI Decorations with Unicode symbols
+---
+
+<div class="tui-global-decorations" aria-hidden="true">
+  <!-- Top decorations -->
+  <div class="tui-deco tui-top-left-corner">
+    <div class="tui-text">
+      ╔═══════════════╗ ║ {">"}terminal ║ ║ localhost ║ ╚═══════════════╝
+    </div>
+  </div>
+
+  <div class="tui-deco tui-top-right-corner">
+    <div class="tui-text">
+      ╔═══════════════╗ ║ ● ONLINE ║ ║ ✓ SECURE ║ ╚═══════════════╝
+    </div>
+  </div>
+
+  <!-- Side decorations -->
+  <div class="tui-deco tui-left-middle">
+    <div class="tui-text">│ │ ⚡ │ ▶ │ ◆ │</div>
+  </div>
+
+  <div class="tui-deco tui-right-middle">
+    <div class="tui-text">│ │ ● │ ■ │ ▲ │</div>
+  </div>
+
+  <!-- Bottom decorations -->
+  <div class="tui-deco tui-bottom-left-corner">
+    <div class="tui-text">
+      ╔════════════════╗ ║ PING: 12ms ║ ║ LOAD: 0.42 ║ ╚════════════════╝
+    </div>
+  </div>
+
+  <div class="tui-deco tui-bottom-right-corner">
+    <div class="tui-text">
+      ╔════════════════╗ ║ ✓ TESTS PASS ║ ║ ✓ BUILD OK ║ ╚════════════════╝
+    </div>
+  </div>
+
+  <!-- Floating status indicators -->
+  <div class="tui-status tui-status-1">▸ BUILD: OK</div>
+
+  <div class="tui-status tui-status-2">▸ DEPLOY: LIVE</div>
+
+  <!-- Connection lines -->
+  <div class="tui-lines">
+    <div class="tui-line tui-line-h1">━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="tui-line tui-line-v1">┃<br />┃<br />┃<br />┃</div>
+    <div class="tui-line tui-line-corner1">┏━━━━━┓</div>
+    <div class="tui-line tui-line-corner2">┗━━━━━┛</div>
+  </div>
+</div>
+
+<style>
+  .tui-global-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--color-accent);
+  }
+
+  .tui-deco {
+    position: absolute;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    opacity: 0.12;
+    white-space: pre;
+  }
+
+  /* Corner positions */
+  .tui-top-left-corner {
+    top: 100px;
+    left: 0.5rem;
+  }
+
+  .tui-top-right-corner {
+    top: 100px;
+    right: 0.5rem;
+    text-align: right;
+  }
+
+  .tui-bottom-left-corner {
+    bottom: 100px;
+    left: 0.5rem;
+  }
+
+  .tui-bottom-right-corner {
+    bottom: 100px;
+    right: 0.5rem;
+    text-align: right;
+  }
+
+  /* Side positions */
+  .tui-left-middle {
+    top: 40%;
+    left: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .tui-right-middle {
+    top: 40%;
+    right: 0.25rem;
+    font-size: 1rem;
+  }
+
+  /* Status indicators */
+  .tui-status {
+    position: absolute;
+    font-size: 0.6rem;
+    opacity: 0.1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-accent);
+  }
+
+  .tui-status-1 {
+    top: 30%;
+    left: 12%;
+    animation: pulse-status 3s infinite;
+  }
+
+  .tui-status-2 {
+    bottom: 25%;
+    right: 15%;
+    animation: pulse-status 3s infinite 1.5s;
+  }
+
+  @keyframes pulse-status {
+    0%,
+    100% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.18;
+    }
+  }
+
+  /* Connection lines */
+  .tui-lines {
+    opacity: 0.06;
+  }
+
+  .tui-line {
+    position: absolute;
+    color: var(--color-fg);
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+
+  .tui-line-h1 {
+    top: 55%;
+    left: 8%;
+  }
+
+  .tui-line-v1 {
+    top: 25%;
+    right: 18%;
+  }
+
+  .tui-line-corner1 {
+    top: 18%;
+    left: 22%;
+    font-size: 0.8rem;
+  }
+
+  .tui-line-corner2 {
+    bottom: 28%;
+    right: 25%;
+    font-size: 0.8rem;
+  }
+
+  /* Responsive - hide on mobile */
+  @media (max-width: 768px) {
+    .tui-deco,
+    .tui-status,
+    .tui-lines {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tui-status-1,
+    .tui-status-2 {
+      animation: none;
+    }
+  }
+</style>

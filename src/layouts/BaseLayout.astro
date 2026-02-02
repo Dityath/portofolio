@@ -1,0 +1,95 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import "../styles/global.css";
+import Maintenance from "../components/Maintenance.astro";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site || "https://yourdomain.com";
+
+// Check maintenance mode from environment variable
+const isMaintenanceMode = import.meta.env.MAINTENANCE_MODE === "true";
+
+// JSON-LD Structured Data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Your Name",
+  url: siteUrl,
+  jobTitle: "Fullstack Developer",
+  description: description,
+  sameAs: [
+    "https://github.com/yourusername",
+    "https://linkedin.com/in/yourusername",
+    "https://medium.com/@yourusername",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </script>
+
+    <!-- View Transitions -->
+    <ViewTransitions />
+  </head>
+  <body>
+    {isMaintenanceMode ? <Maintenance /> : <slot />}
+
+    <!-- GSAP Cleanup on page transitions -->
+    <script>
+      import { cleanupScrollTriggers } from "../lib/gsap-config";
+
+      // Cleanup on page transitions
+      document.addEventListener("astro:before-swap", () => {
+        cleanupScrollTriggers();
+      });
+
+      // Refresh ScrollTrigger after page load
+      document.addEventListener("astro:page-load", () => {
+        import("../lib/gsap-config").then(({ refreshScrollTriggers }) => {
+          setTimeout(() => {
+            refreshScrollTriggers();
+          }, 100);
+        });
+      });
+    </script>
+  </body>
+</html>

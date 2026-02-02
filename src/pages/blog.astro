@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/navigation/Navigation.astro";
+import BlogCard from "../components/blog/BlogCard.astro";
+import { getMediumPosts } from "../lib/medium";
+
+const title = "Dityath - Blog";
+const description =
+  "Articles and blog posts on web development, programming, and technology.";
+
+// Fetch Medium posts
+// Replace 'yourusername' with actual Medium username from .env or hardcode
+const mediumUsername = import.meta.env.MEDIUM_USERNAME || "dityath";
+let posts = [];
+
+try {
+  posts = await getMediumPosts(mediumUsername);
+} catch (error) {
+  console.error("Error loading Medium posts:", error);
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <Navigation />
+  <main class="blog-page">
+    <div class="container-brutal">
+      <h1 class="page-title">BLOG</h1>
+
+      {
+        posts.length === 0 ? (
+          <div class="empty-state">
+            <p class="empty-text">
+              No blog posts found. Update your Medium username in the .env file.
+            </p>
+            <p class="empty-hint">
+              Set <code>MEDIUM_USERNAME=yourusername</code> in .env
+            </p>
+          </div>
+        ) : (
+          <div class="blog-grid">
+            {posts.map((post) => (
+              <BlogCard {...post} />
+            ))}
+          </div>
+        )
+      }
+
+      <div class="blog-footer">
+        <a
+          href={`https://medium.com/@${mediumUsername}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="view-all-link"
+        >
+          VIEW ALL ON MEDIUM →
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-page {
+    min-height: 100vh;
+    padding: 120px 0 80px;
+  }
+
+  .page-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 5px solid var(--color-fg);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .empty-text {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .empty-hint {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .empty-hint code {
+    font-family: "JetBrains Mono", monospace;
+    background: var(--color-fg);
+    color: var(--color-bg);
+    padding: 0.25rem 0.5rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .blog-footer {
+    text-align: center;
+    padding-top: 4rem;
+    border-top: 2px solid var(--color-fg);
+  }
+
+  .view-all-link {
+    display: inline-block;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    padding: 1.5rem 3rem;
+    border: 5px solid var(--color-fg);
+    transition: all 0.3s ease;
+  }
+
+  .view-all-link:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    blogCards.forEach((card, index) => {
+      gsap.from(card, {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+  });
+</script>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/navigation/Navigation.astro";
+import Timeline from "../components/experience/Timeline.astro";
+
+const title = "Dityath - Work Experience";
+const description =
+  "Professional work experience and career timeline of a fullstack developer specializing in React, TypeScript, Golang, and Rust.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Navigation />
+  <main>
+    <Timeline />
+  </main>
+</BaseLayout>

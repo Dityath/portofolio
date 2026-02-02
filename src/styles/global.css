@@ -1,0 +1,327 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+/* Import Fira Code (includes ligatures and powerline symbols) */
+@import "@fontsource/fira-code";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* CSS Variables for theme colors */
+  :root {
+    /* Hacker theme (default) */
+    --color-bg: #000000;
+    --color-fg: #ffffff;
+    --color-accent: #00ff00;
+  }
+
+  /* Alternative themes - uncomment to use */
+  /* Classic */
+  /* :root {
+    --color-bg: #000000;
+    --color-fg: #ffffff;
+    --color-accent: #ffffff;
+  } */
+
+  /* Industrial */
+  /* :root {
+    --color-bg: #1a1a1a;
+    --color-fg: #ffffff;
+    --color-accent: #ffff00;
+  } */
+
+  /* Raw */
+  /* :root {
+    --color-bg: #ffffff;
+    --color-fg: #000000;
+    --color-accent: #ff0000;
+  } */
+
+  /* Base styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: "IBM Plex Mono", monospace;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  /* Grid background pattern */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(var(--color-fg) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-fg) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Scanline effect */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 50%, rgba(0, 255, 0, 0.02) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: -1;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100%;
+    }
+  }
+
+  /* Remove all rounded corners - brutalist aesthetic */
+  * {
+    border-radius: 0 !important;
+  }
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-fg);
+    border: 2px solid var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+
+  /* Custom cursor */
+  body {
+    cursor: crosshair;
+  }
+
+  a,
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Brutalist borders */
+  .border-brutal {
+    border: 2px solid var(--color-fg);
+  }
+
+  .border-brutal-medium {
+    border: 5px solid var(--color-fg);
+  }
+
+  .border-brutal-thick {
+    border: 10px solid var(--color-fg);
+  }
+
+  /* Brutalist buttons */
+  .btn-brutal {
+    padding: 1rem 2rem;
+    border: 5px solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  .btn-brutal:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    transform: scale(1.05);
+  }
+
+  .btn-brutal:active {
+    transform: scale(0.98);
+  }
+
+  /* Brutalist inputs */
+  .input-brutal {
+    padding: 1rem;
+    border: 3px solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .input-brutal:focus {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  /* Container utilities */
+  .container-brutal {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Section spacing */
+  .section-brutal {
+    padding: 8rem 0;
+    border-bottom: 2px solid var(--color-fg);
+  }
+
+  /* Grid utilities */
+  .grid-brutal {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* Text effects */
+  .glitch {
+    position: relative;
+    animation: glitch 1s infinite;
+  }
+
+  @keyframes glitch {
+    0%,
+    100% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  /* Marquee */
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer utilities {
+  /* Accessibility - Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    * {
+      background: white !important;
+      color: black !important;
+    }
+  }
+}
+
+/* Hide elements with reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .glitch {
+    animation: none;
+  }
+
+  .marquee-content {
+    animation: none;
+  }
+}

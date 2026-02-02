@@ -1,0 +1,146 @@
+---
+import type { Stat } from "../../types";
+
+const stats: Stat[] = [
+  { label: "YEARS EXPERIENCE", value: 5, suffix: "+" },
+  { label: "PROJECTS COMPLETED", value: 50, suffix: "+" },
+  { label: "GITHUB COMMITS", value: 2500, suffix: "+" },
+  { label: "LINES OF CODE", value: 100000, suffix: "+" },
+];
+---
+
+<section class="stats section-brutal" id="stats">
+  <div class="container-brutal">
+    <h2 class="section-title">BY THE NUMBERS</h2>
+
+    <div class="stats-grid">
+      {
+        stats.map((stat) => (
+          <div class="stat-card">
+            <div class="stat-value" data-target={stat.value}>
+              <span class="stat-number">0</span>
+              <span class="stat-suffix">{stat.suffix || ""}</span>
+            </div>
+            <div class="stat-label">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  .stats .section-title {
+    color: var(--color-bg);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    border: 5px solid var(--color-bg);
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: scale(1.05);
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  .stat-value {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.25rem;
+  }
+
+  .stat-suffix {
+    font-size: 0.6em;
+  }
+
+  .stat-label {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const statCards = document.querySelectorAll(".stat-card");
+
+    statCards.forEach((card) => {
+      const valueElement = card.querySelector(".stat-value");
+      const numberElement = card.querySelector(".stat-number");
+      const target = parseInt(valueElement?.getAttribute("data-target") || "0");
+
+      if (!numberElement) return;
+
+      // Counter animation
+      const obj = { value: 0 };
+
+      gsap.to(obj, {
+        value: target,
+        duration: 2,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          once: true,
+        },
+        onUpdate: () => {
+          numberElement.textContent = Math.round(obj.value).toLocaleString();
+        },
+      });
+
+      // Card entrance animation
+      gsap.from(card, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          once: true,
+        },
+      });
+
+      // Shake on completion
+      gsap.to(card, {
+        x: () => gsap.utils.random(-5, 5),
+        y: () => gsap.utils.random(-5, 5),
+        duration: 0.1,
+        repeat: 3,
+        yoyo: true,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          once: true,
+        },
+        delay: 2,
+      });
+    });
+  });
+</script>

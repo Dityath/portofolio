@@ -1,0 +1,185 @@
+---
+// Statement / Manifesto Section
+---
+
+<section class="statement" id="statement">
+  <div class="container-brutal">
+    <div class="statement-text-wrapper">
+      <p class="statement-text">
+        <span class="html-tag">&lt;div&gt;</span>
+        I BUILD THINGS THAT DON'T BREAK. PERIOD.
+        <span class="html-tag">&lt;/div&gt;</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Infinite scrolling marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-content">
+      <span class="marquee-text"
+        >REACT • TYPESCRIPT • GOLANG • RUST • DOCKER • KUBERNETES • POSTGRESQL •
+        MONGODB • REDIS • REACT • TYPESCRIPT • GOLANG • RUST • DOCKER •
+        KUBERNETES • POSTGRESQL • MONGODB • REDIS • REACT • TYPESCRIPT • GOLANG
+        • RUST • DOCKER • KUBERNETES • POSTGRESQL • MONGODB • REDIS •
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .statement {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .statement-text-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+  }
+
+  .statement-text {
+    font-size: clamp(1.5rem, 5vw, 4rem);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .html-tag {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.5em;
+    color: var(--color-accent);
+    opacity: 0.5;
+    margin: 1rem 0;
+  }
+
+  .marquee {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 0;
+    background: #ffffff;
+    color: #000000;
+    overflow: hidden;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .marquee-content {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee-scroll 40s linear infinite;
+  }
+
+  .marquee-text {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    display: inline-block;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .statement-text {
+      font-size: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .marquee-text {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const statementText = document.querySelector(".statement-text");
+    const statement = document.querySelector(".statement");
+
+    if (!statementText || !statement) return;
+
+    // Character by character reveal
+    const text = statementText.textContent || "";
+    const htmlTags = statementText.querySelectorAll(".html-tag");
+
+    // Get HTML tag content
+    const openTag = htmlTags[0]?.textContent || "";
+    const closeTag = htmlTags[1]?.textContent || "";
+
+    // Extract the main text
+    const mainText = text.replace(openTag, "").replace(closeTag, "").trim();
+
+    // Split into characters
+    const chars = mainText.split("").map((char) => {
+      return char === " " ? "&nbsp;" : char;
+    });
+
+    // Rebuild the HTML
+    statementText.innerHTML = `
+      <span class="html-tag">${openTag}</span>
+      <span class="main-text">${chars.map((char) => `<span class="char">${char}</span>`).join("")}</span>
+      <span class="html-tag">${closeTag}</span>
+    `;
+
+    const charElements = statementText.querySelectorAll(".main-text .char");
+
+    // Animate characters on scroll
+    gsap.from(charElements, {
+      opacity: 0,
+      duration: 0.05,
+      stagger: 0.02,
+      ease: "none",
+      scrollTrigger: {
+        trigger: statement,
+        start: "top 60%",
+        end: "top 30%",
+        scrub: 1,
+      },
+    });
+
+    // Background color inversion on scroll (optional)
+    gsap.to(statement, {
+      backgroundColor: "var(--color-fg)",
+      color: "var(--color-bg)",
+      scrollTrigger: {
+        trigger: statement,
+        start: "top 50%",
+        end: "bottom 100%",
+        scrub: 1,
+        toggleActions: "play reverse play reverse",
+      },
+    });
+  });
+</script>

@@ -1,0 +1,357 @@
+---
+import type { Project } from '../../types';
+
+// Sample project data - replace with real data
+const projects: Project[] = [
+  {
+    title: 'E-COMMERCE PLATFORM',
+    description: 'Full-stack e-commerce solution with real-time inventory',
+    techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis'],
+    link: '#',
+    github: '#',
+    featured: true,
+  },
+  {
+    title: 'REAL-TIME CHAT',
+    description: 'WebSocket-based chat application with message encryption',
+    techStack: ['TypeScript', 'WebSocket', 'MongoDB'],
+    link: '#',
+    github: '#',
+  },
+  {
+    title: 'API GATEWAY',
+    description: 'High-performance API gateway built with Rust',
+    techStack: ['Rust', 'Docker', 'Kubernetes'],
+    link: '#',
+    github: '#',
+    featured: true,
+  },
+  {
+    title: 'ANALYTICS DASHBOARD',
+    description: 'Real-time analytics dashboard with data visualization',
+    techStack: ['React', 'D3.js', 'Golang', 'TimescaleDB'],
+    link: '#',
+    github: '#',
+  },
+];
+---
+
+<section class="projects" id="projects">
+  <!-- TUI-style section header -->
+  <div class="tui-header">
+    <div class="tui-header-line">
+╔════════════════════════════════════════════════════════════════════╗
+    </div>
+    <h2 class="section-title">
+      <span class="tui-icon">▸</span> FEATURED WORK <span class="tui-bracket">[{projects.length}]</span>
+    </h2>
+    <div class="tui-header-line">
+╚════════════════════════════════════════════════════════════════════╝
+    </div>
+  </div>
+
+  <div class="projects-container">
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <article class="project-card" data-index={index}>
+          <!-- TUI card header -->
+          <div class="tui-card-header">
+┌─────────────────────────────────────────────────┐
+│ PROJECT #{String(index + 1).padStart(2, '0')} {project.featured ? '★ FEATURED' : '          '}                    │
+├─────────────────────────────────────────────────┤
+          </div>
+
+          <div class="project-content">
+            <h3 class="project-title">
+              <span class="project-icon">▸</span> {project.title}
+            </h3>
+            <p class="project-description">
+              <span class="desc-prefix">$</span> {project.description}
+            </p>
+
+            <!-- TUI separator -->
+            <div class="tui-separator">
+├─ STACK ─────────────────────────────────────────┤
+            </div>
+
+            <div class="project-tech">
+              {project.techStack.map((tech) => (
+                <span class="tech-badge">[{tech}]</span>
+              ))}
+            </div>
+
+            <!-- TUI separator -->
+            <div class="tui-separator">
+├─ LINKS ─────────────────────────────────────────┤
+            </div>
+
+            <div class="project-links">
+              {project.link && (
+                <a href={project.link} class="project-link" target="_blank" rel="noopener noreferrer">
+                  ▸ VIEW PROJECT →
+                </a>
+              )}
+              {project.github && (
+                <a href={project.github} class="project-link" target="_blank" rel="noopener noreferrer">
+                  ▸ SOURCE CODE →
+                </a>
+              )}
+            </div>
+          </div>
+
+          <!-- TUI card footer -->
+          <div class="tui-card-footer">
+└─────────────────────────────────────────────────┘
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    min-height: 100vh;
+    padding: 4rem 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  /* TUI Header */
+  .tui-header {
+    margin-top: 4rem;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    padding: 0 2rem;
+  }
+
+  .tui-header-line {
+    font-size: clamp(0.4rem, 1vw, 0.7rem);
+    opacity: 0.6;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .tui-icon {
+    color: var(--color-accent);
+    font-size: 0.8em;
+  }
+
+  .tui-bracket {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.5em;
+    opacity: 0.7;
+  }
+
+  .projects-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .projects-grid {
+    display: flex;
+    gap: 2rem;
+    padding: 0 5vw;
+    position: absolute;
+    will-change: transform;
+  }
+
+  .project-card {
+    border: 3px solid var(--color-fg);
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    transition: all 0.3s ease;
+    position: relative;
+    background: var(--color-bg);
+    height: fit-content;
+    min-width: 40vw;
+    max-width: 40vw;
+    flex-shrink: 0;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(0, 255, 0, 0.2);
+  }
+
+  /* TUI card elements */
+  .tui-card-header,
+  .tui-card-footer {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    white-space: pre;
+    line-height: 1.4;
+    padding: 0.5rem 1rem;
+  }
+
+  .project-content {
+    padding: 1.5rem 2rem;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-icon {
+    color: var(--color-accent);
+    font-size: 0.8em;
+  }
+
+  .project-description {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .desc-prefix {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .tui-separator {
+    font-size: 0.65rem;
+    opacity: 0.5;
+    white-space: pre;
+    margin: 1rem 0;
+    line-height: 1;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-badge {
+    padding: 0.25rem 0.75rem;
+    border: 2px solid var(--color-fg);
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+
+  .tech-badge:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border-color: var(--color-accent);
+  }
+
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .project-link {
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    padding: 0.5rem 0;
+    border-left: 3px solid transparent;
+    padding-left: 1rem;
+  }
+
+  .project-link:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    padding-left: 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tui-header {
+      padding: 0 1rem;
+    }
+
+    .projects-grid {
+      padding: 0 1rem;
+    }
+
+    .tui-header-line {
+      font-size: 0.35rem;
+    }
+
+    .tui-card-header,
+    .tui-card-footer {
+      font-size: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  document.addEventListener('astro:page-load', () => {
+    const projectsSection = document.querySelector('.projects');
+    const projectsGrid = document.querySelector('.projects-grid');
+
+    if (!projectsSection || !projectsGrid) return;
+
+    // Calculate total scroll width
+    const getScrollAmount = () => {
+      const gridWidth = projectsGrid.scrollWidth;
+      const containerWidth = window.innerWidth;
+      return -(gridWidth - containerWidth);
+    };
+
+    // Create horizontal scroll animation
+    const tween = gsap.to(projectsGrid, {
+      x: getScrollAmount,
+      ease: 'none',
+    });
+
+    ScrollTrigger.create({
+      trigger: projectsSection,
+      start: 'top top',
+      end: () => `+=${Math.abs(getScrollAmount()) + 1000}`,
+      pin: true,
+      animation: tween,
+      scrub: 1,
+      invalidateOnRefresh: true,
+    });
+  });
+</script>

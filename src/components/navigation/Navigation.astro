@@ -1,0 +1,308 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { name: "HOME", path: "/" },
+  { name: "EXPERIENCE", path: "/experience" },
+  { name: "BLOG", path: "/blog" },
+  { name: "GITHUB", path: "https://github.com/yourusername", external: true },
+];
+---
+
+<nav class="navigation" role="navigation" aria-label="Main navigation">
+  <!-- Desktop Navigation -->
+  <div class="nav-desktop">
+    <ul class="nav-list">
+      {
+        navLinks.map((link) => (
+          <li class="nav-item">
+            <a
+              href={link.path}
+              class:list={["nav-link", { active: currentPath === link.path }]}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Mobile Navigation Toggle -->
+  <button
+    class="nav-toggle"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+  >
+    <span class="nav-toggle-icon"></span>
+  </button>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="nav-mobile" role="dialog" aria-hidden="true">
+    <ul class="nav-mobile-list">
+      {
+        navLinks.map((link) => (
+          <li class="nav-mobile-item">
+            <a
+              href={link.path}
+              class="nav-mobile-link"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--color-bg);
+    border-bottom: 2px solid var(--color-fg);
+  }
+
+  /* Desktop Navigation */
+  .nav-desktop {
+    display: none;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: block;
+    }
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--color-accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--color-accent);
+  }
+
+  /* Mobile Toggle */
+  .nav-toggle {
+    display: block;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1002;
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--color-fg);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .nav-toggle {
+      display: none;
+    }
+  }
+
+  .nav-toggle:hover {
+    background: var(--color-fg);
+  }
+
+  .nav-toggle-icon {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 2px;
+    background: var(--color-fg);
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle:hover .nav-toggle-icon {
+    background: var(--color-bg);
+  }
+
+  .nav-toggle-icon::before,
+  .nav-toggle-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-fg);
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle:hover .nav-toggle-icon::before,
+  .nav-toggle:hover .nav-toggle-icon::after {
+    background: var(--color-bg);
+  }
+
+  .nav-toggle-icon::before {
+    top: -8px;
+  }
+
+  .nav-toggle-icon::after {
+    bottom: -8px;
+  }
+
+  /* Commented out - unused but kept for future mobile menu implementation */
+  /* .nav-toggle[aria-expanded="true"] .nav-toggle-icon {
+    background: transparent;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+  } */
+
+  /* Mobile Navigation Overlay */
+  .nav-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--color-bg);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Commented out - unused but kept for future mobile menu implementation */
+  /* .nav-mobile[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: all;
+  } */
+
+  @media (min-width: 768px) {
+    .nav-mobile {
+      display: none;
+    }
+  }
+
+  .nav-mobile-list {
+    list-style: none;
+    text-align: center;
+  }
+
+  .nav-mobile-item {
+    margin: 2rem 0;
+  }
+
+  .nav-mobile-link {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+
+  .nav-mobile-link:hover {
+    color: var(--color-accent);
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const toggle = document.querySelector(".nav-toggle") as HTMLButtonElement;
+    const mobileNav = document.querySelector(".nav-mobile") as HTMLElement;
+    const mobileLinks = document.querySelectorAll(".nav-mobile-link");
+
+    if (!toggle || !mobileNav) return;
+
+    // Toggle mobile navigation
+    toggle.addEventListener("click", () => {
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      mobileNav.setAttribute("aria-hidden", String(isExpanded));
+
+      if (!isExpanded) {
+        // Animate in
+        gsap.from(mobileLinks, {
+          y: 50,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        });
+      }
+    });
+
+    // Close on link click
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        toggle.setAttribute("aria-expanded", "false");
+        mobileNav.setAttribute("aria-hidden", "true");
+      });
+    });
+
+    // Close on escape key
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Escape" &&
+        toggle.getAttribute("aria-expanded") === "true"
+      ) {
+        toggle.setAttribute("aria-expanded", "false");
+        mobileNav.setAttribute("aria-hidden", "true");
+      }
+    });
+  });
+</script>

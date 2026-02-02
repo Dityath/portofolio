@@ -1,0 +1,797 @@
+---
+// Hero Section with Terminal Decorations
+---
+
+<section class="hero" id="hero">
+  <!-- Terminal Background Decorations -->
+  <div class="terminal-bg" aria-hidden="true">
+    <div class="terminal-lines">
+      <div class="terminal-line">$ ssh user@production-server</div>
+      <div class="terminal-line">Connecting to 192.168.1.100...</div>
+      <div class="terminal-line">Connection established.</div>
+      <div class="terminal-line">$ cd /var/www/projects</div>
+      <div class="terminal-line">$ npm run build</div>
+      <div class="terminal-line">{">"} Building production bundle...</div>
+      <div class="terminal-line">✓ Build completed successfully</div>
+      <div class="terminal-line">$ docker-compose up -d</div>
+      <div class="terminal-line">Creating network "app_network"</div>
+      <div class="terminal-line">Starting postgres... done</div>
+      <div class="terminal-line">Starting redis... done</div>
+      <div class="terminal-line">$ git status</div>
+      <div class="terminal-line">On branch main</div>
+      <div class="terminal-line">Your branch is up to date</div>
+      <div class="terminal-line">$ kubectl get pods</div>
+      <div class="terminal-line">NAME READY STATUS RESTARTS</div>
+      <div class="terminal-line">api-deployment-7d8f9 1/1 Running 0</div>
+    </div>
+  </div>
+
+  <!-- TUI Box Decorations -->
+  <div class="tui-decorations" aria-hidden="true">
+    <!-- Top Left Box -->
+    <div class="tui-box tui-top-left">
+      <div class="tui-box-border">
+        ┌─────────────┐ │ SYSTEM │ │ ● ONLINE │ │ localhost │ └─────────────┘
+      </div>
+    </div>
+
+    <!-- Top Right Box -->
+    <div class="tui-box tui-top-right">
+      <div class="tui-box-border">
+        ┌──────────────┐ │ :443 │ │ SECURE │ │ SSL/TLS │ └──────────────┘
+      </div>
+    </div>
+
+    <!-- Bottom Left Box -->
+    <div class="tui-box tui-bottom-left">
+      <div class="tui-box-border">
+        ┌──────────────┐ │ CPU: 23% │ │ MEM: 45% │ │ NET: ↑↓ │ └──────────────┘
+      </div>
+    </div>
+
+    <!-- Bottom Right Box -->
+    <div class="tui-box tui-bottom-right">
+      <div class="tui-box-border">
+        ┌──────────────┐ │ ✓ TESTS │ │ ✓ BUILD │ │ DEPLOY │ └──────────────┘
+      </div>
+    </div>
+
+    <!-- Progress bars floating -->
+    <div class="tui-progress tui-progress-1">▸ [████████████░░░░░░░░] 60%</div>
+    <div class="tui-progress tui-progress-2">▸ [███████████████░░░░░] 75%</div>
+    <div class="tui-progress tui-progress-3">▸ [████████████████████] 100%</div>
+  </div>
+
+  <!-- ASCII Art Decorations -->
+  <div class="ascii-decorations" aria-hidden="true">
+    <!-- Additional ASCII elements -->
+    <div class="ascii-brackets">
+      <div class="bracket-tl">┏━━━━━━━━━━━━━┓</div>
+      <div class="bracket-tr">┏━━━━━━━━━━━━━┓</div>
+      <div class="bracket-bl">┗━━━━━━━━━━━━━┛</div>
+      <div class="bracket-br">┗━━━━━━━━━━━━━┛</div>
+    </div>
+  </div>
+
+  <!-- Matrix-style falling code -->
+  <div class="matrix-bg" id="matrix-canvas" aria-hidden="true"></div>
+
+  <div class="container-brutal">
+    <div class="hero-content">
+      <!-- TUI Window Frame -->
+      <div class="tui-window">
+        <div class="tui-window-header">
+          ┌─────────────────────────────────────────────────────────────────┐ │
+          ◉ ◉ ◉ ~/developer/portfolio.sh [✓ LIVE] │
+          ├─────────────────────────────────────────────────────────────────┤
+        </div>
+
+        <!-- Terminal prompt before name -->
+        <div class="terminal-prompt">
+          <span class="prompt-user">root@localhost</span>
+          <span class="prompt-separator">:</span>
+          <span class="prompt-path">~/portfolio</span>
+          <span class="prompt-symbol">$</span>
+          <span class="prompt-command">whoami</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-name">Ditya Athallah</span>
+        </h1>
+
+        <p class="hero-subtitle">FULLSTACK DEVELOPER</p>
+
+        <!-- Terminal output style status -->
+        <div class="terminal-output">
+          <div class="output-line">
+            <span class="output-prompt">{">"}</span>
+            <span class="output-text"
+              >Status: <span class="status-green">ONLINE</span></span
+            >
+          </div>
+          <div class="output-line">
+            <span class="output-prompt">{">"}</span>
+            <span class="output-text">Uptime: 99.9% | Deploys: 1337</span>
+          </div>
+          <div class="output-line">
+            <span class="output-prompt">{">"}</span>
+            <span class="output-text">Location: /dev/null</span>
+          </div>
+        </div>
+
+        <!-- Progress bar separator -->
+        <div class="separator-progress">
+          ├────────────────────[████████████████████]────────────────────┤
+        </div>
+
+        <div class="hero-tech-stack">
+          <span class="tech-tag"
+            ><span class="tech-bracket">[</span>REACT<span class="tech-bracket"
+              >]</span
+            ></span
+          >
+          <span class="tech-tag"
+            ><span class="tech-bracket">[</span>TYPESCRIPT<span
+              class="tech-bracket">]</span
+            ></span
+          >
+          <span class="tech-tag"
+            ><span class="tech-bracket">[</span>GOLANG<span class="tech-bracket"
+              >]</span
+            ></span
+          >
+          <span class="tech-tag"
+            ><span class="tech-bracket">[</span>RUST<span class="tech-bracket"
+              >]</span
+            ></span
+          >
+        </div>
+
+        <div class="tui-window-footer">
+          └─────────────────────────────────────────────────────────────────┘
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span class="scroll-text">│ SCROLL ↓ │</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  /* Terminal Background Lines */
+  .terminal-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.08;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .terminal-lines {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    line-height: 1.8;
+    padding: 2rem;
+    color: var(--color-accent);
+  }
+
+  .terminal-line {
+    animation: terminal-flicker 3s infinite;
+  }
+
+  .terminal-line:nth-child(odd) {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes terminal-flicker {
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  /* TUI Decorations */
+  .tui-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .tui-box {
+    position: absolute;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    opacity: 0.15;
+    color: var(--color-accent);
+    white-space: pre;
+  }
+
+  .tui-top-left {
+    top: 120px;
+    left: 2rem;
+  }
+
+  .tui-top-right {
+    top: 120px;
+    right: 2rem;
+  }
+
+  .tui-bottom-left {
+    bottom: 120px;
+    left: 2rem;
+  }
+
+  .tui-bottom-right {
+    bottom: 120px;
+    right: 2rem;
+  }
+
+  .tui-progress {
+    position: absolute;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    opacity: 0.1;
+    color: var(--color-accent);
+  }
+
+  .tui-progress-1 {
+    top: 30%;
+    left: 5%;
+    animation: pulse-progress 3s infinite;
+  }
+
+  .tui-progress-2 {
+    top: 50%;
+    right: 5%;
+    animation: pulse-progress 3s infinite 1s;
+  }
+
+  .tui-progress-3 {
+    bottom: 30%;
+    left: 10%;
+    animation: pulse-progress 3s infinite 2s;
+  }
+
+  @keyframes pulse-progress {
+    0%,
+    100% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+
+  /* ASCII Decorations */
+  .ascii-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Removed unused ASCII corner decorations */
+
+  .ascii-brackets {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    opacity: 0.08;
+    color: var(--color-fg);
+  }
+
+  .bracket-tl {
+    position: absolute;
+    top: 80px;
+    left: 10%;
+  }
+
+  .bracket-tr {
+    position: absolute;
+    top: 80px;
+    right: 10%;
+  }
+
+  .bracket-bl {
+    position: absolute;
+    bottom: 80px;
+    left: 10%;
+  }
+
+  .bracket-br {
+    position: absolute;
+    bottom: 80px;
+    right: 10%;
+  }
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 0.1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Matrix Background */
+  .matrix-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  /* TUI Window Frame */
+  .tui-window {
+    font-family: "JetBrains Mono", monospace;
+    padding: 2rem 0;
+  }
+
+  .tui-window-header,
+  .tui-window-footer {
+    font-size: clamp(0.5rem, 1vw, 0.75rem);
+    opacity: 0.6;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .tui-window-footer {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  /* Terminal Prompt */
+  .terminal-prompt {
+    font-family: "JetBrains Mono", monospace;
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    margin-bottom: 2rem;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  .prompt-user {
+    color: var(--color-accent);
+  }
+
+  .prompt-separator {
+    color: var(--color-fg);
+    margin: 0 0.25rem;
+  }
+
+  .prompt-path {
+    color: var(--color-fg);
+  }
+
+  .prompt-symbol {
+    color: var(--color-fg);
+    margin: 0 0.5rem;
+  }
+
+  .prompt-command {
+    color: var(--color-accent);
+    animation: cursor-blink 1s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .hero-title {
+    margin-bottom: 1rem;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    color: var(--color-accent);
+  }
+
+  /* Terminal Output */
+  .terminal-output {
+    font-family: "JetBrains Mono", monospace;
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .output-line {
+    margin-bottom: 0.5rem;
+  }
+
+  .output-prompt {
+    color: var(--color-accent);
+    margin-right: 0.5rem;
+  }
+
+  .output-text {
+    color: var(--color-fg);
+  }
+
+  .status-green {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  /* Separator Progress */
+  .separator-progress {
+    font-family: "JetBrains Mono", monospace;
+    font-size: clamp(0.5rem, 1vw, 0.7rem);
+    opacity: 0.5;
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+
+  .hero-tech-stack {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .tech-tag {
+    padding: 0.75rem 1.5rem;
+    border: 3px solid var(--color-fg);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tech-bracket {
+    opacity: 0.5;
+  }
+
+  .tech-tag::before {
+    content: ">";
+    position: absolute;
+    left: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .tech-tag:hover::before {
+    opacity: 1;
+  }
+
+  .tech-tag:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    transform: scale(1.05);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.7;
+    z-index: 1;
+  }
+
+  .scroll-text {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    border: 2px solid var(--color-fg);
+    padding: 0.5rem 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-line,
+    .prompt-command,
+    .tui-progress-1,
+    .tui-progress-2,
+    .tui-progress-3 {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .terminal-bg {
+      opacity: 0.05;
+    }
+
+    .tui-box,
+    .tui-progress,
+    .ascii-brackets {
+      display: none;
+    }
+
+    .terminal-output {
+      font-size: 0.7rem;
+    }
+
+    .tui-window-header,
+    .tui-window-footer {
+      font-size: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { glitchText } from "../../lib/gsap-config";
+
+  document.addEventListener("astro:page-load", () => {
+    const heroName = document.querySelector(".hero-name");
+    const heroSubtitle = document.querySelector(".hero-subtitle");
+    const techTags = document.querySelectorAll(".tech-tag");
+    const scrollIndicator = document.querySelector(".scroll-indicator");
+    const terminalPrompt = document.querySelector(".terminal-prompt");
+
+    if (!heroName) return;
+
+    // Matrix effect
+    createMatrixEffect();
+
+    // Create timeline for entrance animation
+    const tl = gsap.timeline({ delay: 0.5 });
+
+    // Animate TUI window
+    tl.from(".tui-window-header", {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+
+    // Animate terminal prompt
+    tl.from(
+      terminalPrompt,
+      {
+        opacity: 0,
+        x: -20,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    );
+
+    // Split text into characters for stagger animation
+    const nameChars = heroName.textContent?.split("") || [];
+    heroName.innerHTML = nameChars
+      .map(
+        (char) => `<span class="char">${char === " " ? "&nbsp;" : char}</span>`
+      )
+      .join("");
+
+    const chars = heroName.querySelectorAll(".char");
+
+    // Stagger in characters
+    tl.from(
+      chars,
+      {
+        opacity: 0,
+        y: () => gsap.utils.random(-100, 100),
+        x: () => gsap.utils.random(-100, 100),
+        rotation: () => gsap.utils.random(-90, 90),
+        duration: 1.2,
+        stagger: 0.03,
+        ease: "power3.out",
+      },
+      "-=0.3"
+    )
+      .from(
+        heroSubtitle,
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.6"
+      )
+      .from(
+        ".output-line",
+        {
+          opacity: 0,
+          x: -20,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      .from(
+        ".separator-progress",
+        {
+          scaleX: 0,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      .from(
+        techTags,
+        {
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        },
+        "-=0.4"
+      )
+      .from(
+        ".tui-window-footer",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      )
+      .from(
+        scrollIndicator,
+        {
+          y: -20,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
+
+    // Apply glitch effect on load (after initial animation)
+    setTimeout(() => {
+      if (heroName instanceof HTMLElement) {
+        glitchText(heroName);
+      }
+    }, 2000);
+
+    // Parallax mouse movement
+    const hero = document.querySelector(".hero");
+    if (hero) {
+      hero.addEventListener("mousemove", (e: Event) => {
+        const mouseEvent = e as MouseEvent;
+        const { clientX, clientY } = mouseEvent;
+        const { innerWidth, innerHeight } = window;
+
+        const xPercent = (clientX / innerWidth - 0.5) * 2;
+        const yPercent = (clientY / innerHeight - 0.5) * 2;
+
+        gsap.to(".hero-name", {
+          x: xPercent * 20,
+          y: yPercent * 20,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(".tech-tag", {
+          x: xPercent * -10,
+          y: yPercent * -10,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(".tui-box", {
+          x: xPercent * 15,
+          y: yPercent * 15,
+          duration: 0.7,
+          ease: "power2.out",
+        });
+      });
+    }
+  });
+
+  // Matrix falling code effect
+  function createMatrixEffect() {
+    const canvas = document.getElementById("matrix-canvas") as HTMLElement;
+    if (!canvas) return;
+
+    const chars =
+      "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+    const fontSize = 14;
+    const columns = Math.floor(window.innerWidth / fontSize);
+
+    const drops: number[] = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+
+    function draw() {
+      // Create falling characters
+      for (let i = 0; i < columns; i++) {
+        if (Math.random() > 0.99) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.style.position = "absolute";
+          span.style.left = `${i * fontSize}px`;
+          span.style.top = `${drops[i] * fontSize}px`;
+          span.style.color = "var(--color-accent)";
+          span.style.fontFamily = "JetBrains Mono, monospace";
+          span.style.fontSize = `${fontSize}px`;
+          span.style.opacity = "0.3";
+
+          canvas.appendChild(span);
+
+          // Remove after animation
+          setTimeout(() => {
+            span.remove();
+          }, 2000);
+        }
+
+        drops[i]++;
+        if (drops[i] * fontSize > window.innerHeight) {
+          drops[i] = 0;
+        }
+      }
+    }
+
+    // Run less frequently for performance
+    setInterval(draw, 100);
+  }
+</script>

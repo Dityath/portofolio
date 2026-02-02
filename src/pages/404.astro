@@ -1,0 +1,404 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Check if maintenance mode is active
+const isMaintenanceMode = import.meta.env.MAINTENANCE_MODE === 'true';
+---
+
+<BaseLayout
+  title="404 - Page Not Found"
+  description="The page you are looking for does not exist."
+>
+  {!isMaintenanceMode && (
+    <div class="error-container">
+      <div class="error-content">
+        <!-- TUI Error Header -->
+        <div class="tui-error-header">
+          <pre class="error-ascii">
+╔════════════════════════════════════════════════════════════════════╗
+║                         ERROR HANDLER                              ║
+╚════════════════════════════════════════════════════════════════════╝
+          </pre>
+        </div>
+
+        <!-- Main Error Box -->
+        <div class="error-box">
+          <pre class="error-frame">
+┌─────────────────────────────────────────────────────────────────┐
+│ ⚠ HTTP ERROR 404                                                │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  STATUS:    [●] NOT FOUND                                      │
+│  CODE:      404                                                 │
+│  MESSAGE:   The requested resource could not be found          │
+│  PATH:      {Astro.url.pathname}                                │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│ TRACEBACK:                                                      │
+│  ▸ Route matching failed                                       │
+│  ▸ Resource not found in server tree                           │
+│  ▸ No fallback handler available                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+          </pre>
+        </div>
+
+        <!-- Large 404 -->
+        <div class="error-code">
+          <div class="code-text">404</div>
+          <div class="code-label">PAGE NOT FOUND</div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div class="terminal-window">
+          <div class="terminal-header">
+┌─ root@portfolio:~/errors ─────────────────────────────── [×] ─┐
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="prompt">root@portfolio:~/errors$</span>
+              <span class="command">cat error.log</span>
+            </div>
+            <div class="terminal-output">
+              <span class="timestamp">[{new Date().toISOString()}]</span>
+              <span class="error-level">ERROR</span>
+              Route not found: {Astro.url.pathname}
+              <br>
+              <span class="timestamp">[{new Date().toISOString()}]</span>
+              <span class="warning-level">WARN</span>
+              Redirecting user to safe location...
+            </div>
+            <div class="terminal-line">
+              <span class="prompt">root@portfolio:~/errors$</span>
+              <span class="command blink">_</span>
+            </div>
+          </div>
+          <div class="terminal-footer">
+└───────────────────────────────────────────────────────────────────┘
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <a href="/" class="action-btn primary">
+            <span class="btn-icon">▸</span> RETURN TO HOME
+          </a>
+          <button onclick="history.back()" class="action-btn secondary">
+            <span class="btn-icon">◂</span> GO BACK
+          </button>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions-box">
+          <pre class="suggestions-content">
+┌─ SUGGESTIONS ──────────────────────────────────────────────────┐
+│                                                                 │
+│  • Check the URL for typos                                     │
+│  • Use navigation menu to find what you're looking for         │
+│  • Visit the home page and start fresh                         │
+│  • Contact support if you believe this is an error             │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+          </pre>
+        </div>
+      </div>
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .error-container {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    padding: 2rem;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Grid background */
+  .error-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(var(--color-accent) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-accent) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .error-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  }
+
+  /* Error Header */
+  .tui-error-header {
+    margin-bottom: 2rem;
+    animation: slideDown 0.6s ease-out;
+  }
+
+  .error-ascii {
+    font-size: clamp(0.5rem, 1.5vw, 0.8rem);
+    text-align: center;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  /* Error Box */
+  .error-box {
+    margin-bottom: 2rem;
+    animation: slideDown 0.8s ease-out;
+  }
+
+  .error-frame {
+    font-size: clamp(0.6rem, 1.5vw, 0.85rem);
+    margin: 0;
+    line-height: 1.8;
+    white-space: pre;
+    overflow-x: auto;
+    color: #ff6b6b;
+  }
+
+  /* Large 404 Code */
+  .error-code {
+    text-align: center;
+    margin: 3rem 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .code-text {
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-accent);
+    font-family: 'Space Grotesk', sans-serif;
+    text-shadow:
+      3px 3px 0 rgba(0, 255, 0, 0.3),
+      -3px -3px 0 rgba(0, 255, 0, 0.3);
+  }
+
+  .code-label {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+  }
+
+  /* Terminal Window */
+  .terminal-window {
+    margin-bottom: 2rem;
+    border: 3px solid var(--color-accent);
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .terminal-header,
+  .terminal-footer {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 255, 0, 0.05);
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .terminal-line {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .prompt {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .command {
+    margin-left: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .terminal-output {
+    margin: 1rem 0 1rem 1rem;
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+
+  .timestamp {
+    color: #666;
+    margin-right: 0.5rem;
+  }
+
+  .error-level {
+    color: #ff6b6b;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .warning-level {
+    color: #ffd93d;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+
+  .blink {
+    animation: blink 1s step-start infinite;
+  }
+
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease-out 0.5s both;
+  }
+
+  .action-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem 2rem;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: 3px solid var(--color-fg);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .action-btn.primary {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .action-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.3);
+  }
+
+  .btn-icon {
+    font-size: 1.2em;
+  }
+
+  /* Suggestions Box */
+  .suggestions-box {
+    animation: fadeIn 1s ease-out 0.8s both;
+  }
+
+  .suggestions-content {
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.7;
+    line-height: 1.8;
+  }
+
+  /* Animations */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .error-container {
+      padding: 1rem;
+    }
+
+    .error-ascii,
+    .error-frame,
+    .suggestions-content {
+      font-size: 0.6rem;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .action-btn {
+      min-width: 100%;
+    }
+
+    .code-text {
+      font-size: 4rem;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .tui-error-header,
+    .error-box,
+    .error-code,
+    .terminal-window,
+    .action-buttons,
+    .suggestions-box,
+    .blink {
+      animation: none;
+    }
+  }
+</style>
