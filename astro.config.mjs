@@ -13,7 +13,7 @@ export default defineConfig({
   },
   vite: {
     build: {
-      cssMinify: "lightningcss",
+      cssMinify: "esbuild", // Changed from lightningcss to esbuild for better Docker compatibility
     },
   },
 });

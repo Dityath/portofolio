@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-bun.lockb
+# bun.lockb is needed for Docker build
 
 # Build outputs
 dist/
@@ -19,8 +19,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment files
-.env
-.env.*
+# Note: .env is included for build-time variables (needed for Astro static build)
+.env.local
+.env.*.local
+!.env
 !.env.example
 
 # OS files
