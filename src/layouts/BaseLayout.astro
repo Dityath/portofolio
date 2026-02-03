@@ -13,7 +13,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site || "https://yourdomain.com";
 
 // Check maintenance mode from environment variable
-const isMaintenanceMode = import.meta.env.MAINTENANCE_MODE === "true";
+const isMaintenanceMode = import.meta.env.PUBLIC_MAINTENANCE_MODE === "true";
 
 // JSON-LD Structured Data
 const jsonLd = {

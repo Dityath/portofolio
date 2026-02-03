@@ -3,9 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - MAINTENANCE_MODE=${MAINTENANCE_MODE:-false}
     container_name: brutalist-portfolio
     ports:
-      - "80:80"
+      - "${APP_PORT:-80}:80"
       - "443:443"
     restart: unless-stopped
     environment:
